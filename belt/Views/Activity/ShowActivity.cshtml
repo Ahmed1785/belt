@@ -1,0 +1,16 @@
+<nav>
+    <h1>Bride: @ViewBag.oneactivity.Title</h1>
+    <a href="/dashboard">Dashboard</a>
+    <a href="logout">Logout</a>
+</nav>
+<h3>@ViewBag.oneactivity.Date.ToString("D")</h3>
+<h3>Participants:</h3>
+<ul>
+
+   @foreach (var x in @ViewBag.oneactivity.Participants)
+   {
+       <li> @x.Guest.First_Name @x.Guest.Last_Name</li>
+      
+   }
+    
+</ul>

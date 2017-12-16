@@ -1,0 +1,61 @@
+﻿    <style>
+table, tr, td, th {
+   border: 1px solid black;
+}
+    </style>
+    <a href="logout">Logout</a>
+    <h2>Welcome to the Activity Planner, @ViewBag.User.First_Name! </h2>
+      
+    <table>
+        <tr>
+            <th>Activity</th>
+            <th>Date and Time</th> 
+            <th>Duration</th>
+            <th>Event Coordinator</th>
+            <th>Number of Participants</th>
+            <th>Action</th>
+        </tr>
+@{
+    @foreach(var x in @ViewBag.activities)
+    {
+    bool status = false;
+        <tr>
+            <td><a href="showaactivity/@x.ActivityId">@x.Title</a></td>
+            <td>@x.Date.ToString("dd MMM yyyy") @@ @x.Time.ToString("hh:mm tt") </td> 
+            <td>@x.Duration</td>
+            <td>@x.Planner.Email</td>
+            <td>@x.Participants.Count</td>            
+            @if(@x.UserId == @ViewBag.User.UserId)
+                    {
+                        status = true;
+                        <td><a href="/deleteactivity/@x.ActivityId">Delete</a></td>
+                    } 
+            else 
+            {                       
+                    @foreach(var item in @x.Participants)
+                    {
+                        @if(@item.UserId == @ViewBag.User.UserId)
+                        {
+                            status = true;
+                            <td><a href="/UNJOIN/@item.ParticipantId">UNJOIN</a></td>
+                            break;
+                        }
+                    }
+            }
+            @if(status==false)
+            {
+            <td><a href="participant/@x.ActivityId">Join</a></td>
+        
+            }
+        </tr>
+    }
+}
+    </table>
+
+    
+    
+    <form action="activityform" method="get">
+        <h3>
+            <button class="btn">New Activity</button>
+        </h3>
+    </form>

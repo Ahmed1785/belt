@@ -1,0 +1,35 @@
+@model belt.Models.Activity
+
+<a href="/dashboard">Dashboard</a>
+<a href="logout">Logout</a>
+
+
+    <div>
+        <h2>Plan Your Activity</h2>
+        <form asp-controller="Activity" asp-action="addactivity" method="post">
+            <span asp-validation-for="Title"></span>
+            <label asp-for="Title"></label>
+            <br><br>
+            <input asp-for="Title" />
+            <br>
+            <br><label for="Time">Time:</label><br>
+            <br><input type="time" name="EventTime">
+            <br><br>
+            <span asp-validation-for="Date"></span>
+            <label asp-for="Date"></label>
+            <br><br>
+            <input asp-for="Date" />
+            <br><br>
+            <span asp-validation-for="Duration"></span>
+            <label asp-for="Duration"></label>
+            <br><br>
+            <input asp-for="Duration" />
+            <br><br>
+            <span asp-validation-for="Description"></span>
+            <label asp-for="Description"></label>
+            <br><br>
+            <input asp-for="Description" />
+            <br><br>
+            <button type="submit" class="btn">Create</button>
+        </form>
+    </div>
